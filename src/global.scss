@@ -26,4 +26,6 @@
 @import "@ionic/angular/css/flex-utils.css";
 
 
-@import "./tailwind.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
