@@ -1,56 +1,79 @@
 <ion-header [translucent]="true">
-	<ion-toolbar>
-		<ion-buttons slot="start">
-			<ion-button>
-				<ion-icon aria-hidden="true" name="football-outline"></ion-icon>
-			</ion-button>
-		</ion-buttons>
-		<ion-title>League</ion-title>
-	</ion-toolbar>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-icon aria-hidden="true" name="football-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Italian Series A League</ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-	<ion-header collapse="condense">
-		<ion-toolbar>
-			<ion-title size="large">league-search</ion-title>
-		</ion-toolbar>
-	</ion-header>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">league-search</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-	<div class="px-5">
-		<div class="my-10">
-			<ion-searchbar 
-				class="border rounded-md custom-search" 
-				[debounce]="1000" 
-				fill="none"
-				(ionInput)="handleInput($event)"
-				placeholder="Search League"
-				value="{{ searchVal }}"
-			></ion-searchbar>
-		</div>
-	
-		<ion-card class="shadow-none m-0 p-0" *ngIf="!isLoading && searchVal.length && data.length && !isError">
-			<ion-card-header class="m-0 p-0">
-				<ion-card-title>{{ data.length }} result of {{ searchVal }}</ion-card-title>
-			</ion-card-header>
-			<ion-card-content class="m-0 p-0">
-				<ion-list>
-					<ion-item button (click)="getRedirect(d.strTeam, d)" *ngFor="let d of data" class="my-4 border rounded-sm" lines="none">
-						<ion-thumbnail slot="start" class="flex justify-center items-center">
-							<img alt="{{ d.strTeamBadge }}" src="{{ d.strTeamBadge }}" />
-						</ion-thumbnail>
-						<div class="flex flex-col my-5">
-							<ion-label>{{ d.strTeam }}</ion-label>
-							<ion-label>
-								<span class="text-sm text-gray-500">{{ d.strCountry }} - {{ d.intFormedYear }}</span>
-							</ion-label>
-						</div>
-					</ion-item>
-				</ion-list>
-			</ion-card-content>
-		</ion-card>
+  <div class="px-5">
+    <div class="my-10">
+      <ion-searchbar
+        class="border rounded-md custom-search"
+        [debounce]="1000"
+        fill="none"
+        (ionInput)="handleInput($event)"
+        placeholder="Search League"
+        value="{{ searchVal }}"
+      ></ion-searchbar>
+    </div>
 
-		<p class="text-center" *ngIf="!isLoading && searchVal.length && !data.length && !isError">Ups, no result found.</p>
+    <ion-card
+      class="shadow-none m-0 p-0"
+      *ngIf="!isLoading && searchVal.length && data.length && !isError"
+    >
+      <ion-card-header class="m-0 p-0">
+        <ion-card-title
+          >{{ data.length }} result of {{ searchVal }}</ion-card-title
+        >
+      </ion-card-header>
+      <ion-card-content class="m-0 p-0">
+        <ion-list>
+          <ion-item
+            button
+            (click)="getRedirect(d.strTeam, d)"
+            *ngFor="let d of data"
+            class="my-4 border rounded-sm"
+            lines="none"
+          >
+            <ion-thumbnail
+              slot="start"
+              class="flex justify-center items-center"
+            >
+              <img alt="{{ d.strTeamBadge }}" src="{{ d.strTeamBadge }}" />
+            </ion-thumbnail>
+            <div class="flex flex-col my-5">
+              <ion-label>{{ d.strTeam }}</ion-label>
+              <ion-label>
+                <span class="text-sm text-gray-500"
+                  >{{ d.strCountry }} - {{ d.intFormedYear }}</span
+                >
+              </ion-label>
+            </div>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
 
-		<p class="text-center text-red-600" *ngIf="!isLoading && isError">Ups, server error.</p>
-	</div>
+    <p
+      class="text-center"
+      *ngIf="!isLoading && searchVal.length && !data.length && !isError"
+    >
+      Ups, no result found.
+    </p>
+
+    <p class="text-center text-red-600" *ngIf="!isLoading && isError">
+      Ups, server error.
+    </p>
+  </div>
 </ion-content>
